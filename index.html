@@ -64,6 +64,14 @@
   .vcard .cap{padding:12px 16px}
   .vcard .cap h3{margin:0 0 4px;font-size:16px}
   .vcard .cap p{margin:0;color:var(--muted);font-size:13.5px}
+  /* Gallery */
+  .shots{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .shot{margin:0;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+  .shot .frame{position:relative;aspect-ratio:16/9;background:linear-gradient(180deg,#12324c,#0b1a28);display:grid;place-items:center}
+  .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0b1a28}
+  .shot .placeholder{color:var(--dim);text-align:center;font-size:14px;padding:16px;z-index:1}
+  .shot .placeholder .ic{font-size:30px;color:var(--accent);display:block;margin-bottom:4px}
+  .shot figcaption{padding:11px 15px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--border)}
   /* Features */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
@@ -94,6 +102,7 @@
     <span class="brand"><img src="media/logo.png" alt="RFBench">RFBench</span>
     <span class="spacer"></span>
     <a class="link" href="#video">Demo</a>
+    <a class="link" href="#galerie">Galerie</a>
     <a class="link" href="#features">Funktionen</a>
     <a class="link" href="#standards">Normen</a>
     <a class="btn" href="mailto:Martin81moser@web.de?subject=RFBench%20Lizenz-Anfrage">Lizenz anfragen</a>
@@ -113,6 +122,7 @@
         <a class="btn" href="mailto:Martin81moser@web.de?subject=RFBench%20Lizenz-Anfrage">Lizenz anfragen</a>
         <a class="btn ghost" href="#video">3D-Flug ansehen</a>
       </div>
+      <div style="margin-top:10px;color:var(--dim);font-size:13.5px">oder direkt: <a href="mailto:Martin81moser@web.de">Martin81moser@web.de</a></div>
       <div class="hero-badge">
         <span><b>Offline</b> · keine Cloud</span>
         <span><b>Byte-reproduzierbar</b></span>
@@ -158,6 +168,20 @@
     </div>
   </section>
 
+  <section id="galerie">
+    <div class="sec-head">
+      <div class="eyebrow">Galerie</div>
+      <h2>Werkzeuge im Einsatz</h2>
+      <p>Reale Ansichten aus RFBench — Live-Verkehr gegen die Abdeckung, geländebasierte Heatmaps und 3D-Darstellung.</p>
+    </div>
+    <div class="shots">
+      <figure class="shot"><div class="frame"><img src="media/shot-adsb.png" alt="ADS-B Live-Verkehr über der Abdeckung" loading="lazy"><div class="placeholder"><span class="ic">✈</span>ADS-B Live-Verkehr<br><small>Bild folgt</small></div></div><figcaption>ADS-B Live-Verkehr vs. Abdeckung</figcaption></figure>
+      <figure class="shot"><div class="frame"><img src="media/shot-heatmap.png" alt="Abdeckungskarte mit Heatmap über Gelände" loading="lazy"><div class="placeholder"><span class="ic">🗺</span>Abdeckungs-Heatmap<br><small>Bild folgt</small></div></div><figcaption>Abdeckungskarte mit Heatmap (Gelände)</figcaption></figure>
+      <figure class="shot"><div class="frame"><img src="media/shot-3dterrain.png" alt="3D-Geländekarte der Abdeckung" loading="lazy"><div class="placeholder"><span class="ic">🗻</span>3D-Geländekarte<br><small>Bild folgt</small></div></div><figcaption>3D-Geländekarte</figcaption></figure>
+      <figure class="shot"><div class="frame"><img src="media/shot-interference.png" alt="Interferenz-/Co-Site-Analyse" loading="lazy"><div class="placeholder"><span class="ic">📡</span>Interferenz &amp; Co-Site<br><small>Bild folgt</small></div></div><figcaption>Interferenz- &amp; Co-Site-Analyse</figcaption></figure>
+    </div>
+  </section>
+
   <section id="features">
     <div class="sec-head">
       <div class="eyebrow">Funktionen</div>
@@ -197,18 +221,38 @@
 <footer>
   <div class="wrap foot">
     <span class="brand"><img src="media/logo.png" alt="" style="height:24px">RFBench · ATC Frequenzplanung Suite</span>
-    <span>© <span id="yr"></span> Martin Moser · <a href="mailto:Martin81moser@web.de">Kontakt &amp; Lizenz</a></span>
+    <span>© <span id="yr"></span> Martin Moser · Kontakt &amp; Lizenz: <a href="mailto:Martin81moser@web.de">Martin81moser@web.de</a></span>
   </div>
 </footer>
 
+<div id="toast" style="position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+  background:#0f2334;border:1px solid var(--border);color:var(--text);padding:11px 16px;border-radius:10px;
+  font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50"></div>
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
-  // Platzhalter ausblenden, sobald das Video ladbar ist (echte Aufnahme später eingespielt).
+  // Platzhalter ausblenden, sobald Video/Bild ladbar ist (echte Medien später eingespielt).
   document.querySelectorAll('.vcard').forEach(function(c){
     var v=c.querySelector('video'), ph=c.querySelector('.placeholder');
-    if(!v||!ph) return;
-    v.addEventListener('loadeddata', function(){ ph.style.display='none'; });
-    v.addEventListener('error', function(){ /* Platzhalter bleibt */ }, true);
+    if(v&&ph){ v.addEventListener('loadeddata', function(){ ph.style.display='none'; }); }
+  });
+  document.querySelectorAll('.shot').forEach(function(c){
+    var img=c.querySelector('img'), ph=c.querySelector('.placeholder');
+    if(!img||!ph) return;
+    img.addEventListener('load', function(){ if(img.naturalWidth>1) ph.style.display='none'; });
+    if(img.complete && img.naturalWidth>1) ph.style.display='none';
+  });
+  // „Lizenz anfragen"/Kontakt: mailto öffnet das Mailprogramm FALLS vorhanden — und zusätzlich
+  // wird die Adresse in die Zwischenablage kopiert + bestätigt, damit der Klick IMMER etwas bewirkt.
+  var toast=document.getElementById('toast'), toastT=null;
+  function showToast(msg){ toast.textContent=msg; toast.style.opacity='1'; toast.style.transform='translateX(-50%) translateY(0)';
+    clearTimeout(toastT); toastT=setTimeout(function(){ toast.style.opacity='0'; toast.style.transform='translateX(-50%) translateY(20px)'; }, 3200); }
+  var MAIL='Martin81moser@web.de';
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){
+    a.addEventListener('click', function(){
+      try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(MAIL);
+        showToast('📋 E-Mail kopiert: '+MAIL); } else { showToast('E-Mail: '+MAIL); } }catch(e){ showToast('E-Mail: '+MAIL); }
+      // Standard-mailto läuft weiter (öffnet Mailprogramm, falls konfiguriert).
+    });
   });
 </script>
 </body>
