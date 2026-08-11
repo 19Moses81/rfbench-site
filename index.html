@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RFBench — ATC Frequenzplanung Suite</title>
+<meta name="description" content="RFBench — auditierbare, offline-fähige Suite zur ATC-VHF/UHF-Frequenzplanung: Abdeckung, 3D-Flug, Interferenz, Nachweis nach ITU/ICAO.">
+<link rel="icon" href="media/logo.png">
+<style>
+  :root{
+    --bg:#0a1622; --bg2:#0d1c2b; --panel:#0f2334; --panel2:#12293c;
+    --border:#1e3a52; --text:#e8eef5; --muted:#93a9bf; --dim:#6c839a;
+    --accent:#4cc2ff; --accent-ink:#04263b; --green:#4ade80; --amber:#fbbf24; --red:#ff5a5f;
+    --radius:14px; --maxw:1080px;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:radial-gradient(1200px 700px at 78% -10%,#123049 0,var(--bg) 60%) fixed,var(--bg);
+    color:var(--text);font-family:var(--font);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  /* Header */
+  header{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
+    background:rgba(10,22,34,.72);border-bottom:1px solid var(--border)}
+  .nav{display:flex;align-items:center;gap:16px;height:60px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+  .brand img{height:30px;width:auto;border-radius:6px}
+  .nav .spacer{flex:1}
+  .nav a.link{color:var(--muted);font-size:14px}
+  .nav a.link:hover{color:var(--text);text-decoration:none}
+  .btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:700;
+    padding:9px 16px;border-radius:9px;font-size:14px;border:1px solid transparent;transition:transform .06s ease,filter .2s}
+  .btn:hover{filter:brightness(1.08);text-decoration:none;transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:var(--text);border-color:var(--border)}
+  /* Hero */
+  .hero{padding:64px 0 34px;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .eyebrow{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+  h1{font-size:clamp(30px,5vw,50px);line-height:1.05;margin:12px 0 14px;letter-spacing:-.02em;text-wrap:balance}
+  .lead{color:var(--muted);font-size:18px;max-width:60ch}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .hero-badge{margin-top:20px;display:flex;gap:18px;flex-wrap:wrap;color:var(--dim);font-size:13px}
+  .hero-badge b{color:var(--text)}
+  .hero-art{position:relative;aspect-ratio:1/1;border-radius:24px;overflow:hidden;
+    background:conic-gradient(from 210deg at 50% 50%,#0e2438,#123a2e,#0e2438);
+    border:1px solid var(--border);display:grid;place-items:center}
+  .hero-art img{width:72%;filter:drop-shadow(0 10px 30px rgba(0,0,0,.5))}
+  .ring{position:absolute;border:1px solid rgba(76,194,255,.25);border-radius:50%}
+  /* Sections */
+  section{padding:52px 0;border-top:1px solid var(--border)}
+  .sec-head{max-width:60ch;margin-bottom:26px}
+  .sec-head .eyebrow{font-size:12px}
+  h2{font-size:clamp(22px,3.2vw,32px);margin:8px 0 8px;letter-spacing:-.01em}
+  .sec-head p{color:var(--muted);margin:0}
+  /* Video */
+  .videos{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .vcard{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+  .vcard .frame{position:relative;aspect-ratio:16/9;background:
+    linear-gradient(180deg,#12324c,#0b1a28);display:grid;place-items:center}
+  .vcard video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0b1a28}
+  .vcard .placeholder{color:var(--dim);text-align:center;font-size:14px;padding:20px}
+  .vcard .placeholder .play{font-size:34px;color:var(--accent);display:block;margin-bottom:6px}
+  .vcard .cap{padding:12px 16px}
+  .vcard .cap h3{margin:0 0 4px;font-size:16px}
+  .vcard .cap p{margin:0;color:var(--muted);font-size:13.5px}
+  /* Features */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+  .card .ic{font-size:22px}
+  .card h3{margin:10px 0 6px;font-size:16px}
+  .card p{margin:0;color:var(--muted);font-size:14px}
+  /* Standards strip */
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{border:1px solid var(--border);background:var(--panel2);color:var(--muted);
+    padding:7px 12px;border-radius:999px;font-size:13px}
+  .chip b{color:var(--text)}
+  /* Footer */
+  footer{border-top:1px solid var(--border);padding:34px 0 60px;color:var(--dim);font-size:13.5px}
+  .foot{display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+  .note{background:var(--panel);border:1px solid var(--border);border-radius:12px;
+    padding:14px 16px;color:var(--muted);font-size:13px;margin-top:22px}
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr;gap:24px} .hero-art{max-width:360px}
+    .videos{grid-template-columns:1fr} .grid{grid-template-columns:1fr}
+    .nav a.link{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <span class="brand"><img src="media/logo.png" alt="RFBench">RFBench</span>
+    <span class="spacer"></span>
+    <a class="link" href="#video">Demo</a>
+    <a class="link" href="#features">Funktionen</a>
+    <a class="link" href="#standards">Normen</a>
+    <a class="btn" href="mailto:Martin81moser@web.de?subject=RFBench%20Lizenz-Anfrage">Lizenz anfragen</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border-top:none">
+    <div>
+      <div class="eyebrow">ATC VHF/UHF · Frequenzplanung &amp; Nachweis</div>
+      <h1>Funkabdeckung planen. Interferenz sehen. Alles belegen.</h1>
+      <p class="lead">RFBench ist eine <b>offline-fähige, auditierbare</b> Suite für die Flugsicherungs-Frequenzplanung:
+        Abdeckungskarten mit echtem Gelände, 3D-Cockpit-Flug durch das Versorgungsgebiet, Interferenz- und
+        Co-Site-Analyse — mit reproduzierbarem Rechenweg nach ITU- und ICAO-Referenzen.</p>
+      <div class="cta">
+        <a class="btn" href="mailto:Martin81moser@web.de?subject=RFBench%20Lizenz-Anfrage">Lizenz anfragen</a>
+        <a class="btn ghost" href="#video">3D-Flug ansehen</a>
+      </div>
+      <div class="hero-badge">
+        <span><b>Offline</b> · keine Cloud</span>
+        <span><b>Byte-reproduzierbar</b></span>
+        <span><b>DE · EN · FR</b></span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="ring" style="width:96%;height:96%"></div>
+      <div class="ring" style="width:70%;height:70%"></div>
+      <div class="ring" style="width:44%;height:44%"></div>
+      <img src="media/logo.png" alt="RFBench Logo">
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="sec-head">
+      <div class="eyebrow">Demo</div>
+      <h2>3D-Cockpit-Flug &amp; Climax-Abdeckung</h2>
+      <p>Erste-Person-Flug durch das nach Empfangsreserve eingefärbte Gelände (grün = versorgt → rot = unter Schwelle),
+        Standort und Ortsnamen markiert — sowie die 3D-Darstellung der Offset-Carrier/Climax-Versorgung.</p>
+    </div>
+    <div class="videos">
+      <div class="vcard">
+        <div class="frame">
+          <video controls preload="metadata" playsinline poster="media/flight-poster.jpg">
+            <source src="media/flight.mp4" type="video/mp4">
+            <source src="media/flight.webm" type="video/webm">
+          </video>
+          <div class="placeholder"><span class="play">▶</span>3D-Cockpit-Flug<br><small>Video wird ergänzt</small></div>
+        </div>
+        <div class="cap"><h3>3D-Cockpit-Flug</h3><p>Perspektivischer Flug entlang frei wählbarer Route; HUD zeigt Pegel/Reserve.</p></div>
+      </div>
+      <div class="vcard">
+        <div class="frame">
+          <video controls preload="metadata" playsinline poster="media/climax-poster.jpg">
+            <source src="media/climax.mp4" type="video/mp4">
+            <source src="media/climax.webm" type="video/webm">
+          </video>
+          <div class="placeholder"><span class="play">▶</span>3D-Climax / Offset-Carrier<br><small>Video wird ergänzt</small></div>
+        </div>
+        <div class="cap"><h3>3D-Climax / Offset-Carrier</h3><p>Mehrsender-Versorgung mit Offset-Trägern, räumlich dargestellt.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="sec-head">
+      <div class="eyebrow">Funktionen</div>
+      <h2>Von der Koordinate bis zum Behörden-Nachweis</h2>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="ic">🗺</div><h3>Abdeckung mit Gelände</h3><p>Flächenraster über SRTM-Gelände (P.526/ITM) mit echten Funkschatten und Empfangsreserve.</p></div>
+      <div class="card"><div class="ic">🛩</div><h3>3D-Cockpit-Flug</h3><p>Erste-Person-Flug durchs Versorgungsgebiet, Standort- und Ortsnamen-Marker, HUD-Pegel.</p></div>
+      <div class="card"><div class="ic">📡</div><h3>Co-Site &amp; Interferenz</h3><p>Kollokation, Entkopplung, IM-Produkte, Blocking, Gleichkanal/Climax-Offsets.</p></div>
+      <div class="card"><div class="ic">📶</div><h3>Ausbreitungsmodelle</h3><p>ITU-R P.525/526/528/1546/2001, ITM/Longley-Rice — mit Gültigkeitsbereichen.</p></div>
+      <div class="card"><div class="ic">🧾</div><h3>Nachweis-Kette</h3><p>Reproduzierbarer Rechenweg, Unsicherheitsbudget, PDF-Dossier, Zwei-Personen-Prinzip.</p></div>
+      <div class="card"><div class="ic">🔌</div><h3>Interoperabel</h3><p>SEAMCAT-Import (.sws/.swr), GeoJSON/CSV/JSON-Export, ADS-B-Realverkehr, Melde-Register.</p></div>
+    </div>
+  </section>
+
+  <section id="standards">
+    <div class="sec-head">
+      <div class="eyebrow">Normen &amp; Qualität</div>
+      <h2>Belegbar, nicht behauptet</h2>
+      <p>Kernmodelle gegen offizielle ITU-/NTIA-/OFCOM-Referenzen geprüft, Build byte-reproduzierbar,
+        kontinuierliche Selbsttests. RFBench ist ein <b>Entscheidungs- und Nachweiswerkzeug</b> — keine
+        zertifizierte Sicherheitsfunktion.</p>
+    </div>
+    <div class="chips">
+      <span class="chip"><b>ITU-R</b> P.525 / 526 / 528 / 1546 / 2001</span>
+      <span class="chip"><b>ICAO</b> Annex 10 · EUR Doc 011</span>
+      <span class="chip"><b>ITM</b> Longley-Rice (NTIA)</span>
+      <span class="chip"><b>ISO/IEC 25010</b> Selbstbewertung</span>
+      <span class="chip"><b>Reproduzierbar</b> · ECDSA-signiert</span>
+    </div>
+    <div class="note">Hinweis: RFBench dient der Planung und Nachweisführung. Ergebnisse ersetzen keine
+      behördliche Freigabe; verbindliche Koordinierungs-Exporte sind als ENTWURF gekennzeichnet.</div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="brand"><img src="media/logo.png" alt="" style="height:24px">RFBench · ATC Frequenzplanung Suite</span>
+    <span>© <span id="yr"></span> Martin Moser · <a href="mailto:Martin81moser@web.de">Kontakt &amp; Lizenz</a></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  // Platzhalter ausblenden, sobald das Video ladbar ist (echte Aufnahme später eingespielt).
+  document.querySelectorAll('.vcard').forEach(function(c){
+    var v=c.querySelector('video'), ph=c.querySelector('.placeholder');
+    if(!v||!ph) return;
+    v.addEventListener('loadeddata', function(){ ph.style.display='none'; });
+    v.addEventListener('error', function(){ /* Platzhalter bleibt */ }, true);
+  });
+</script>
+</body>
+</html>
