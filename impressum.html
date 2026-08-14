@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impressum — RFBench</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="media/logo.png">
+<style>
+  :root{--bg:#0a1622;--panel:#0f2334;--border:#1e3a52;--text:#e8eef5;--muted:#93a9bf;--accent:#4cc2ff;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  *{box-sizing:border-box} html,body{margin:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6}
+  a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+  header{border-bottom:1px solid var(--border);background:rgba(10,22,34,.8)}
+  .nav{max-width:760px;margin:0 auto;padding:0 22px;height:58px;display:flex;align-items:center;gap:10px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+  .brand img{height:28px;border-radius:6px}
+  .nav .sp{flex:1} .nav a.back{color:var(--muted);font-size:14px}
+  main{max-width:760px;margin:0 auto;padding:40px 22px 70px}
+  h1{font-size:30px;margin:0 0 6px;letter-spacing:-.01em}
+  h2{font-size:18px;margin:28px 0 8px}
+  p{margin:6px 0;color:var(--text)} .muted{color:var(--muted);font-size:14px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:14px 0}
+  address{font-style:normal;line-height:1.7}
+  footer{border-top:1px solid var(--border);color:var(--muted);font-size:13px}
+  .foot{max-width:760px;margin:0 auto;padding:22px}
+</style>
+</head>
+<body>
+<header><div class="nav">
+  <span class="brand"><img src="media/logo.png" alt="RFBench">RFBench</span>
+  <span class="sp"></span>
+  <a class="back" href="index.html">← Startseite</a>
+</div></header>
+
+<main>
+  <h1>Impressum</h1>
+  <p class="muted">Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG)</p>
+
+  <div class="card">
+    <address>
+      Martin Moser<br>
+      Kapuzinerstraße 8<br>
+      94474 Vilshofen an der Donau<br>
+      Deutschland
+    </address>
+  </div>
+
+  <h2>Kontakt</h2>
+  <p>E-Mail: <a href="mailto:Martin81moser@web.de">Martin81moser@web.de</a></p>
+
+  <h2>Umsatzsteuer</h2>
+  <p>Kleinunternehmer gemäß § 19 Umsatzsteuergesetz (UStG) — es wird keine Umsatzsteuer ausgewiesen und keine Umsatzsteuer-Identifikationsnummer geführt.</p>
+
+  <h2>Verantwortlich für den Inhalt</h2>
+  <p>Martin Moser (Anschrift wie oben)</p>
+
+  <h2>Verbraucherstreitbeilegung</h2>
+  <p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen (§ 36 Verbraucherstreitbeilegungsgesetz, VSBG).</p>
+
+  <h2>Haftung für Inhalte</h2>
+  <p class="muted">Die Inhalte dieser Seiten wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität wird jedoch keine Gewähr übernommen. Als Diensteanbieter sind wir für eigene Inhalte nach den allgemeinen Gesetzen verantwortlich; eine Verpflichtung zur Überwachung übermittelter oder gespeicherter fremder Informationen besteht nicht.</p>
+
+  <h2>Haftung für Links</h2>
+  <p class="muted">Diese Seite enthält ggf. Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für diese fremden Inhalte ist stets der jeweilige Anbieter verantwortlich. Bei Bekanntwerden von Rechtsverletzungen werden entsprechende Links umgehend entfernt.</p>
+
+  <h2>Urheberrecht</h2>
+  <p class="muted">Die auf diesen Seiten veröffentlichten Inhalte, Bilder und Videos unterliegen dem deutschen Urheberrecht. „RFBench" sowie das RFBench-Logo sind Kennzeichen des Betreibers. Eine Vervielfältigung oder Verwendung außerhalb der gesetzlich zulässigen Fälle bedarf der vorherigen Zustimmung.</p>
+</main>
+
+<footer><div class="foot">
+  © <span id="yr"></span> Martin Moser · <a href="index.html">Startseite</a> · <a href="datenschutz.html">Datenschutz</a>
+</div></footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
