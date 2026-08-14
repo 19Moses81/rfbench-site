@@ -147,9 +147,8 @@
     <div class="videos">
       <div class="vcard">
         <div class="frame">
-          <video controls preload="metadata" playsinline poster="media/flight-poster.jpg">
+          <video controls preload="metadata" playsinline>
             <source src="media/flight.mp4" type="video/mp4">
-            <source src="media/flight.webm" type="video/webm">
           </video>
           <div class="placeholder"><span class="play">▶</span>3D-Cockpit-Flug<br><small>Video wird ergänzt</small></div>
         </div>
@@ -157,9 +156,8 @@
       </div>
       <div class="vcard">
         <div class="frame">
-          <video controls preload="metadata" playsinline poster="media/climax-poster.jpg">
+          <video controls preload="metadata" playsinline>
             <source src="media/climax.mp4" type="video/mp4">
-            <source src="media/climax.webm" type="video/webm">
           </video>
           <div class="placeholder"><span class="play">▶</span>3D-Climax / Offset-Carrier<br><small>Video wird ergänzt</small></div>
         </div>
@@ -233,7 +231,7 @@
   // Platzhalter ausblenden, sobald Video/Bild ladbar ist (echte Medien später eingespielt).
   document.querySelectorAll('.vcard').forEach(function(c){
     var v=c.querySelector('video'), ph=c.querySelector('.placeholder');
-    if(v&&ph){ v.addEventListener('loadeddata', function(){ ph.style.display='none'; }); }
+    if(v&&ph){ var hide=function(){ ph.style.display='none'; }; v.addEventListener('loadedmetadata', hide); v.addEventListener('loadeddata', hide); v.addEventListener('canplay', hide); }
   });
   document.querySelectorAll('.shot').forEach(function(c){
     var img=c.querySelector('img'), ph=c.querySelector('.placeholder');
