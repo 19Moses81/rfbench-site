@@ -1,0 +1,11 @@
+{
+  "version": "1.36.55",
+  "notes": "RFBench 1.36.55",
+  "pub_date": "2026-08-14T19:49:58Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSZEN6QXF5VnBHY0tBS0NmaVhUelAyV2NxQW5pQXBya3hONFYrQWVOM0lRUnFHc0oxQUw3eVU4TGVQN1o2QUtkbEVSeFlQRkVHTVJJMzZXZ0s1Mld1Slp1Um94R29scmdzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg2NzM2OTk3CWZpbGU6UkZCZW5jaF8xLjM2LjU1X3g2NC1zZXR1cC5leGUKRWhtVFNnS3pRcGFUclZrbmdOb2pLVHVmSHlnMHhNY3c1Ny83eU51bm94NjlYc2t1em5tanlmYVUxbTgrMlBTWStSVkp0WFBzVjVkeFliK3hES29kQWc9PQo=",
+      "url": "https://github.com/19Moses81/RFBench/releases/download/v1.36.55/RFBench_1.36.55_x64-setup.exe"
+    }
+  }
+}
