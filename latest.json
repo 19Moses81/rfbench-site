@@ -1,11 +1,11 @@
 {
-    "version":  "1.37.101",
-    "notes":  "RFBench 1.37.101",
-    "pub_date":  "2026-08-25T19:54:25Z",
+    "version":  "1.37.103",
+    "notes":  "RFBench 1.37.103",
+    "pub_date":  "2026-08-25T20:04:28Z",
     "platforms":  {
                       "windows-x86_64":  {
-                                             "signature":  "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSZEN6QXF5VnBHY04yb05yNS94TkdQenFWSUdGeHFlZEUzaGRWaHZGanYrelRvUEwrV0o5Q1FxTXdLeW9QeDhGajNIaXprVmx4Ym5RVlJOWkhRUXZzR3QwU2lXeE5VRXdzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg3Njg3NjY1CWZpbGU6UkZCZW5jaF8xLjM3LjEwMV94NjQtc2V0dXAuZXhlCnNTN3g3cG5BcGZEWHFrSDhreGVHT25DQkRhSUplNy8wOHcyTkhFNnJGb0EzdlNhY29zYkgxSXAzWDJjc1pXV1E5MFkrTUMzZjVVTFBxSU9tUGhJdUJRPT0K",
-                                             "url":  "https://github.com/19Moses81/rfbench-site/releases/download/v1.37.101/RFBench_1.37.101_x64-setup.exe"
+                                             "signature":  "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSZEN6QXF5VnBHY0tXNFdQb0hOYUIyc2tvbHdCZ3R6K2VWZC95bUlUdXdxbzQvWG5DeHBwWXhMbnNaUVE3TVF6YXg3ZHE1Q3FRNytrR3JXTlkvWEJSQ2o5Ui9QYzJaN0FBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg3Njg4MjY4CWZpbGU6UkZCZW5jaF8xLjM3LjEwM194NjQtc2V0dXAuZXhlCnV1WUVSamZrcnQwUWt4aUM2emZ1OFU2Ulh0eUVDcCtZOGg4dnJwTzdSMEZWbTdpRHMxaE13SkNkUFM0cXo4c09uMkdhOXlrS0lXYTZKd09IL0ZyVERnPT0K",
+                                             "url":  "https://github.com/19Moses81/rfbench-site/releases/download/v1.37.103/RFBench_1.37.103_x64-setup.exe"
                                          }
                   }
 }
